@@ -57,6 +57,6 @@ stages:
         connectedServiceNameARM: 'JesumeWIF-v3'
         appType: 'functionAppLinux'
         isFlexConsumption: true
-        appName: '$(Parameters.AppName)'
+        appName: 'jesumeflextestpy'
 
 
