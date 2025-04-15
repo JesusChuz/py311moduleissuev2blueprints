@@ -42,6 +42,6 @@ jobs:
         run: |
           az functionapp deployment source config-zip \
             --name ${{ env.FUNCTIONAPP_NAME }} \
-            --resource-group <YOUR_RESOURCE_GROUP> \
+            --resource-group "consumpttest" \
             --src ${{ env.ZIP_PATH }} \
             --build-remote true
