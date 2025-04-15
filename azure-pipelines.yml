@@ -10,6 +10,8 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
+  AppType: 'functionAppLinux'
+  AppName: 'jesumeflextestpy'
   # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/'
   functionAppName: 'jesumeflextestpy'
@@ -49,18 +51,12 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
     
-    - task: AzureCLI@2
-      displayName: 'Deploy to Flex Consumption Function App using /api/publish (remote build)'
+    - task: AzureFunctionApp@2
+      displayName: 'Deploy Azure Function App'
       inputs:
-        azureSubscription: 'JesumeWIF-v3'
-        scriptType: bash
-        scriptLocation: inlineScript
-        inlineScript: |
-          echo "Deploying to Azure Function App (Flex Consumption) via /api/publish endpoint"
-          az functionapp deployment source config-zip \
-            --name "$(functionAppName)" \
-            --resource-group "$(resourceGroup)" \
-            --src "$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip" \
-            --build-remote true
+        connectedServiceNameARM: 'JesumeWIF-v3'
+        appType: 'functionAppLinux'
+        isFlexConsumption: true
+        appName: '$(Parameters.AppName)'
 
 
