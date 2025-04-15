@@ -1,0 +1,5 @@
+gymnasium==0.29.1
+scipy
+tqdm
+torch==2.5.0
+azure_functions
